@@ -118,10 +118,10 @@ export default class MessageContainer extends React.PureComponent {
 
   render() {
     if (this.props.messages.length === 0) {
-      return <View style={styles.container} />;
+      return <View style={{ ...styles.container, ...this.props.listViewContainerStyle }} />;
     }
     return (
-      <View style={styles.container}>
+      <View style={{ ...styles.container, ...this.props.listViewContainerStyle }}>
         <FlatList
           ref={(ref) => (this.flatListRef = ref)}
           keyExtractor={(item) => item._id}
@@ -168,6 +168,7 @@ MessageContainer.defaultProps = {
   loadEarlier: false,
   listViewProps: {},
   invertibleScrollViewProps: {}, // TODO: support or not?
+  listViewContainerStyle: {},
 };
 
 MessageContainer.propTypes = {
@@ -181,4 +182,5 @@ MessageContainer.propTypes = {
   inverted: PropTypes.bool,
   loadEarlier: PropTypes.bool,
   invertibleScrollViewProps: PropTypes.object, // TODO: support or not?
+  listViewContainerStyle: PropTypes.object,
 };
