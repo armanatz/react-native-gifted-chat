@@ -5,13 +5,15 @@ import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import Color from './Color';
 
-export default function SystemMessage({ currentMessage, containerStyle, wrapperStyle, textStyle }) {
+export default function SystemMessage({ currentMessage, containerStyle, wrapperStyle, textStyle, children }) {
   return (
-    <View style={[styles.container, containerStyle]}>
-      <View style={[styles.wrapper, wrapperStyle]}>
-        <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
+    children || (
+      <View style={[styles.container, containerStyle]}>
+        <View style={[styles.wrapper, wrapperStyle]}>
+          <Text style={[styles.text, textStyle]}>{currentMessage.text}</Text>
+        </View>
       </View>
-    </View>
+    )
   );
 }
 
@@ -38,6 +40,7 @@ SystemMessage.defaultProps = {
   containerStyle: {},
   wrapperStyle: {},
   textStyle: {},
+  children: null,
 };
 
 SystemMessage.propTypes = {
@@ -45,4 +48,5 @@ SystemMessage.propTypes = {
   containerStyle: ViewPropTypes.style,
   wrapperStyle: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
+  children: PropTypes.element,
 };
